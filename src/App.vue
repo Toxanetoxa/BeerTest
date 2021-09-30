@@ -38,7 +38,7 @@
         </tbody>
       </table>
       <button
-        v-if="this.findPost || this.viewPost.length !== 0"
+        v-if="this.findPost || this.viewPost.length"
         class="btn btn-dark"
         @click.prevent="showNext"
       >
@@ -87,16 +87,12 @@ export default {
     },
     deletePost(viewPost) {
       this.viewPosts = this.viewPosts.filter((el) => el.id !== viewPost.id);
-      return;
     },
     toggle(id) {
       this.modalVisible = !this.modalVisible;
       if (this.modalVisible) {
         this.currentEdited = id;
       }
-    },
-    inputName(event) {
-      this.name = event.target.value;
     },
     savePost(data) {
       let post = this.viewPosts.findIndex((e) => e.id === data.id);
@@ -106,9 +102,6 @@ export default {
   },
   watch: {
     async count() {
-      if (this.count <= 0) {
-        return;
-      }
       try {
         this.fetchPost();
       } catch (e) {
@@ -122,22 +115,4 @@ export default {
 };
 </script>
 
-<style>
-.mymodal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  background: white;
-  border: black solid 1px;
-  border-radius: 15px;
-  padding: 10px;
-  justify-content: flex-end;
-}
-.btn {
-  justify-self: flex-end;
-}
-</style>
+<style></style>
